@@ -1,0 +1,18 @@
+CREATE SEQUENCE customers_pk_seq
+    MINVALUE 1
+    MAXVALUE 9999999999999999999999999999
+    START WITH 1
+    INCREMENT BY 1
+    CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL;
+
+CREATE TABLE customers
+(
+    person_id  NUMBER(19, 0) PRIMARY KEY,
+    birth_date DATE,
+    country    VARCHAR2(255 CHAR),
+    first_name VARCHAR2(255 CHAR),
+    last_name  VARCHAR2(255 CHAR)
+);
+
+
+

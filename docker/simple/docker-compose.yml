@@ -1,0 +1,67 @@
+version: '3'
+services:
+
+  # Oracle server
+  ora-db:
+    container_name: ora-db
+    image: container-registry.oracle.com/database/express:21.3.0-xe
+    ports:
+      - 1521:1521
+      - 5500:5500
+    environment:
+      - ORACLE_PWD=changeme
+      - AUTO_MEM_CALCULATION=true
+
+  #Eureka Service
+  eureka-service:
+    image: jbprek/sb27-netflix-eureka-server:2024.0.0
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_HOST
+    networks:
+      - sb27-netfilix
+    restart: on-failure
+
+  #Spring cloud config server
+#  config:
+#    container_name: mcsvc-infra-config-service
+#    image: jbprek/mcsvc-infra-config-service:latest
+#    ports:
+#      - "8888:8888"
+#    depends_on:
+#      - sb27-netfilix
+#    environment:
+#      - EUREKA_URL
+#      - CONFIG_GIT_URL
+#      - CONFIG_GIT_USERNAME
+#      - CONFIG_GIT_PASSWORD
+#      - CONFIG_KEYSTORE_LOCATION
+#      - CONFIG_KEYSTORE_PASSWORD
+#      - CONFIG_KEYSTORE_ALIAS
+#      - CONFIG_KEYSTORE_SECRET
+#    networks:
+#      - sb27-netfilix
+#    restart: on-failure
+#
+#    #Codecentic Spring Boot Admin
+#  admin:
+#    container_name: mcsvc-infra-admin-service
+#    image: jbprek/mcsvc-infra-admin-service:latest
+#    ports:
+#      - "9000:9000"
+#    depends_on:
+#      - sb27-netfilix
+#      - config
+#    environment:
+#      - EUREKA_URL
+#      - CONFIG_GIT_URL
+#    networks:
+#      - sb27-netfilix
+#    restart: on-failure
+
+networks:
+  sb27-netfilix:
+
+
+

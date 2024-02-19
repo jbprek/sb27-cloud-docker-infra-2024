@@ -1,0 +1,25 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "customers-api"
+  datasource:
+    url: jdbc:oracle:thin:@//localhost:1521/XEPDB1
+    username: customers
+    password: customers
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      minimumIdle: 5
+      maximumPoolSize: 10
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      max-lifetime: 1800000
+      pool-name: HikariPoolCustomers
+  jpa:
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+#    hibernate:
+#      ddl-auto: create
+
+app:
+  api:
+    path: /v1/customers
